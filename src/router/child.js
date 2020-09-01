@@ -24,5 +24,11 @@ export const routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'basetable',
+    name: 'basetable',
+    component: () => import('@/views/BaseTable.vue'),
+    meta: {title: '世界', icon: 'el-icon-s-home'}
   }
 ]

@@ -10,7 +10,7 @@ import store from '@/store'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | 后台管理系统`
+  document.title = `后台管理系统 | ${to.meta.title}`
   // 登录权限管控
   const role = (JSON.parse(sessionStorage.getItem('userInfo')) && JSON.parse(sessionStorage.getItem('userInfo')).username) || null
   if (to.meta.title !== from.meta.title) {

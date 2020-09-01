@@ -82,6 +82,20 @@ blockquote:before, blockquote:after, q:before, q:after {
 textarea {
     overflow:auto;resize:none;
 }
-.cursor{
-    cursor:pointer;
+// 使用在字符图标上hover时的样式
+.ibass--default{
+  color: red;
+  transition: color .5s;
+  cursor: pointer;
+  &:hover {
+      color: blue;
+  }
+}
+// 文本不允许选中
+.noselect{
+  user-select: none;
+}
+// 点击无效
+.click--invalid {
+  pointer-events: none;
 }

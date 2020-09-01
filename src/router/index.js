@@ -17,10 +17,12 @@ export default new Router({
     }, {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/Login')
+      component: () => import('@/views/Login'),
+      meta: {title: '登录'}
     }, {
       path: '*',
-      component: () => import('@/views/NotFound.vue')
+      component: () => import('@/views/NotFound.vue'),
+      meta: {title: '未知页面'}
     }
   ]
 })
