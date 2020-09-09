@@ -23,38 +23,42 @@
       <template v-for="item in items">
         <template v-if="item.children">
           <!-- 有子菜单的一级菜单 -->
-          <el-submenu :index="item.name" :key="item.name">
+          <el-submenu :index="item.path" :key="item.path">
             <template slot="title">
               <i v-if="item.meta.icon" :class="item.meta.icon"></i>
               <span slot="title">{{item.meta.title }}</span>
             </template>
             <template v-for="subItem in item.children">
               <!-- 有子菜单的二级菜单 -->
-              <el-submenu v-if="subItem.children" :index="subItem.path" :key="subItem.name">
+              <el-submenu v-if="subItem.children" :index="item.path+'/'+subItem.path" :key="subItem.name">
                 <template slot="title">{{ subItem.meta.title }}</template>
                 <!-- 三级菜单 -->
-                <el-menu-item
-                  v-for="threeItem in subItem.children"
-                  :key="threeItem.name"
-                  :index="threeItem.path"
+                <router-link
+                v-for="threeItem in subItem.children"
+                :to="{name:threeItem.name}"
+                :key="threeItem.name"
+                >
+                  <el-menu-item
                 >{{ threeItem.meta.title }}</el-menu-item>
+                </router-link>
               </el-submenu>
               <!-- 无子菜单的二级菜单 -->
-              <el-menu-item
-                v-else
-                :index="subItem.path"
-                :key="subItem.name"
+              <router-link v-else :to ="{name:subItem.name}" :key="subItem.name">
+                <el-menu-item
               >{{ subItem.meta.title }}</el-menu-item>
+              </router-link>
             </template>
           </el-submenu>
         </template>
         <!-- 无子菜单的一级菜单 -->
-        <template v-else>
-          <el-menu-item :index="item.name" :key="item.name">
-            <i v-if="item.meta.icon" :class="item.meta.icon"></i>
-            <span slot="title">{{item.meta.title}}</span>
-          </el-menu-item>
-        </template>
+        <router-link v-else :to ="{name:item.name}" :key="item.name">
+          <template >
+              <el-menu-item>
+                <i v-if="item.meta.icon" :class="item.meta.icon"></i>
+                <span slot="title">{{item.meta.title}}</span>
+              </el-menu-item>
+          </template>
+        </router-link>
       </template>
     </el-menu>
   </div>
@@ -96,6 +100,7 @@ export default {
   top: 70px;
   bottom: 0;
   overflow-y: scroll;
+  background-color: #fff;
 }
 .sidebar::-webkit-scrollbar {
   width: 0;

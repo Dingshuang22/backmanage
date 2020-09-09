@@ -2,19 +2,21 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import actions from './actions'
 import mutations from './mutations'
-import dashboard from './modules/dashboard'
 
 Vue.use(Vuex)
 
+const state = {
+  addRoutes: []
+}
+
+const getters = {
+
+}
 const store = new Vuex.Store({
-  state: {
-    count: 26
-  },
+  state,
   actions,
-  mutations,
-  modules: {
-    dashboard
-  }
+  getters,
+  mutations
 })
 
 export default store

@@ -16,13 +16,36 @@
                 <i class="el-icon-s-home"></i> 基础表格
             </el-breadcrumb-item>
         </el-breadcrumb>
+
     </div>
     <div class="container">
-      <div class="box border-red-1px">
-        <div style="width:100%;height:100%" class="chessboard">
 
-        </div>
-      </div>
+         <el-table :data="tableData" border stripe style="width: 100%;">
+          <el-table-column prop="item" label="item">
+            <template slot-scope="scope">
+              <el-input v-if="scope.row.edit" v-model="scope.row.item" placeholder="item"></el-input>
+              <span v-else>{{scope.row.item}}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button v-if="scope.row.edit" type="text" size="medium" @click="confirmAdd(scope.row)">
+                <i class="el-icon-check" aria-hidden="true"></i>
+              </el-button>
+              <div v-else>
+                <el-button type="text" size="medium" @click="editData(scope.row)">
+                  <i class="el-icon-edit" aria-hidden="true"></i>
+                </el-button>
+                <el-button type="text" size="medium" @click="deleteData(scope.row,scope.$index)">
+                  <i class="el-icon-delete" aria-hidden="true"></i>
+                </el-button>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-button type="text" @click="addData">添加数据</el-button>
+
     </div>
   </div>
 </template>
@@ -31,10 +54,32 @@
 export default {
   name: 'basetable',
   data () {
-    return {}
+    return {
+      tableData: []
+    }
   },
   computed: {},
-  methods: {},
+  methods: {
+    // 添加
+    addData () {
+      this.tableData.push({
+        edit: true
+      })
+    },
+    // 确认添加
+    confirmAdd (row) {
+      row.edit = false
+      console.log(this.tableData)
+    },
+    // 修改
+    editData (row) {
+      row.edit = true
+    },
+    // 删除
+    deleteData (row, index) {
+      this.tableData.splice(index, 1)
+    }
+  },
   mounted () {
   }
 }

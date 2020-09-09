@@ -17,7 +17,7 @@
         :class="{'active': isActive(item.path)}"
         :key="index"
       >
-        <router-link :to="item.name" class="tags-li-title">{{item.title}}</router-link>
+        <router-link :to="{name:item.name}" class="tags-li-title">{{item.title}}</router-link>
         <span class="tags-li-icon" @click="closeTags(index)">
           <i class="el-icon-close"></i>
         </span>
@@ -79,9 +79,10 @@ export default {
     // 设置标签
     setTags (route) {
       const isExist = this.tagsList.some((item) => {
-        // console.log("****")
+        // console.log('****')
         // console.log(route.fullPath)
-        // console.log('目标'+item.path)
+        // console.log('目标' + item.path)
+        // console.log(route.matched[route.matched.length - 1].components.default.name)
         return item.path === route.fullPath
       })
       if (!isExist) {
@@ -91,7 +92,7 @@ export default {
         this.tagsList.push({
           title: route.meta.title,
           path: route.fullPath,
-          name: route.matched[1].components.default.name
+          name: route.matched[route.matched.length - 1].components.default.name
         })
       }
       bus.$emit('tags', this.tagsList)

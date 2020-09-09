@@ -4,6 +4,8 @@ import _ from 'lodash'
 var routesList = []
 _(routes).forEach(function (val) {
   if (!val.children) {
+    console.log('***')
+    console.log(val.component)
     routesList.push(val)
   } else {
     _(val.children).forEach(function (value) {
@@ -17,6 +19,7 @@ _(routes).forEach(function (val) {
     })
   }
 })
+
 const func = {
   /**
    * 设置本地存储

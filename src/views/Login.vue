@@ -60,9 +60,9 @@ export default {
       this.$refs.login.validate(valid => {
         if (valid) {
           this.$message.success('登录成功')
-          // localStorage.setItem('ms_username', this.param.username);
-          let param = JSON.stringify(this.param)
+          let param = JSON.stringify({...this.param, roles: this.param.username})
           func.setS('userInfo', param, 'session')
+
           this.$router.push({name: 'dashboard'})
         } else {
           this.$message.error('请输入账号和密码')

@@ -1,7 +1,7 @@
 
 const mutations = {
-  countAdd (state) {
-    state.count++
+  setPermission (state, accessedRouters) {
+    state.addRoutes = accessedRouters
   }
 }
 
