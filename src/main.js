@@ -7,6 +7,9 @@ import '@/plugins/elementui'
 import '@/assets/styles/index.scss'
 import store from '@/store'
 import './permission'
+import {func} from '@/func'
+
+Vue.prototype.$func = func
 
 Vue.config.productionTip = false
 

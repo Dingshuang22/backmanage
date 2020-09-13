@@ -4,8 +4,8 @@ import _ from 'lodash'
 var routesList = []
 _(routes).forEach(function (val) {
   if (!val.children) {
-    console.log('***')
-    console.log(val.component)
+    // console.log('***')
+    // console.log(val.component)
     routesList.push(val)
   } else {
     _(val.children).forEach(function (value) {
@@ -69,6 +69,55 @@ const func = {
     } else {
       window.localStorage.removeItem(k)
     }
+  },
+
+  getObjectURL (file) {
+    console.log(file)
+    let url = null
+    if (window.createObjectURL !== undefined) {
+      // basic
+      url = window.createObjectURL(file)
+    } else if (window.URL !== undefined) {
+      // mozilla(firefox)
+      url = window.URL.createObjectURL(file)
+    } else if (window.webkitURL !== undefined) {
+      // webkit or chrome
+      url = window.webkitURL.createObjectURL(file)
+    }
+    return url
+  },
+  /**
+   * toBase64
+   */
+  toBase64 (data) {
+    var toBase64Table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    var base64Pad = '='
+    var result = ''
+    var length = data.length
+    var i
+    // Convert every three bytes to 4 ascii characters.
+
+    for (i = 0; i < (length - 2); i += 3) {
+      result += toBase64Table[data.charCodeAt(i) >> 2]
+      result += toBase64Table[((data.charCodeAt(i) & 0x03) << 4) + (data.charCodeAt(i + 1) >> 4)]
+      result += toBase64Table[((data.charCodeAt(i + 1) & 0x0f) << 2) + (data.charCodeAt(i + 2) >> 6)]
+      result += toBase64Table[data.charCodeAt(i + 2) & 0x3f]
+    }
+
+    // Convert the remaining 1 or 2 bytes, pad out to 4 characters.
+    if (length % 3) {
+      i = length - (length % 3)
+      result += toBase64Table[data.charCodeAt(i) >> 2]
+      if ((length % 3) === 2) {
+        result += toBase64Table[((data.charCodeAt(i) & 0x03) << 4) + (data.charCodeAt(i + 1) >> 4)]
+        result += toBase64Table[(data.charCodeAt(i + 1) & 0x0f) << 2]
+        result += base64Pad
+      } else {
+        result += toBase64Table[(data.charCodeAt(i) & 0x03) << 4]
+        result += base64Pad + base64Pad
+      }
+    }
+    return result
   }
 }
 
