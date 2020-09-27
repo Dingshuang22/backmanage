@@ -8,10 +8,12 @@ import '@/assets/styles/index.scss'
 import store from '@/store'
 import './permission'
 import {func} from '@/func'
+import _ from 'lodash'
 
 Vue.prototype.$func = func
 
 Vue.config.productionTip = false
+Vue.prototype._ = _
 
 /* eslint-disable no-new */
 new Vue({
