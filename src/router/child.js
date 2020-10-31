@@ -6,6 +6,7 @@ const constantRoutes = [
     component: () => import('@/views/Dashboard.vue'),
     meta: {title: '首页', icon: 'el-icon-s-home'}
   }
+
 ]
 const routes = [
   {
@@ -46,6 +47,11 @@ const routes = [
         meta: {title: '拖拽列表', icon: 'el-icon-s-home', permission: true}
       }
     ]
+  }, {
+    path: '/magnifier',
+    name: 'magnifier',
+    component: () => import('@/views/Magnifier.vue'),
+    meta: {title: '放大镜', icon: 'el-icon-s-home'}
   }
 ]
 routes.push(constantRoutes[0])

@@ -57,7 +57,8 @@ export default {
       ],
       area: '',
       p1: '',
-      p2: ''
+      p2: '',
+      p3: ''
     }
   },
   computed: {},
@@ -89,6 +90,18 @@ export default {
         })
       }
 
+      // if (val.length === 3) {
+      //   value = val[2]
+      //   areaLevel = 4
+      //   console.log(this.province[this.p1].children[this.p2].children)
+      //   // debugger
+      //   this.province[this.p1].children[this.p2].children.map((v, a) => {
+      //     if (v.value === value) {
+      //       // this.p3 = a// 这里是取你选中第san层的第几个
+      //     }
+      //   })
+      // }
+
       console.log(areaLevel)
       if (areaLevel === 2) {
         console.log(value)
@@ -110,6 +123,9 @@ export default {
       if (areaLevel === 3) {
         console.log(value)
         let county = [{label: '利川', value: '666'}, {label: '来凤', value: '656'}]
+        // county.forEach((v, a) => {
+        //   v['children'] = []// 如果想要下一级，这里要设置为[]
+        // })
         console.log(this.province[this.p1].children)
         this.province[this.p1].children.forEach((v, a) => {
           if (v.value === value) {
@@ -118,6 +134,13 @@ export default {
         })
         this.$set(this.province, 'province', this.province)
       }
+
+      // if (areaLevel === 4) {
+      //   let town = [{label: '团报', value: '777'}]
+      //   console.log(this.province[this.p1].children[this.p2].children[this.p3])
+      //   this.province[this.p1].children[this.p2].children[this.p3].children = town
+      //   this.$set(this.province, 'province', this.province)
+      // }
     },
     // 操作选中的数据
     handleChange (val) {
